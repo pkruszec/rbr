@@ -1,7 +1,7 @@
+#!/usr/bin/env python3
 import os
 import sys
 import argparse
-#!/usr/bin/env python3
 
 import re
 import pathlib
