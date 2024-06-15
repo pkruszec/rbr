@@ -13,7 +13,6 @@ def get_paths(start_dir: pathlib.Path, recursive: bool):
 
 def main():
     parser = argparse.ArgumentParser(prog="rbr", description="bulk rename files using Python regex patterns")
-    # TODO: doc
     parser.add_argument("-r", "--recursive", action="store_true", help="search recursively")
     parser.add_argument("-s", "--start_dir", default="./")
     parser.add_argument("pattern")
@@ -32,8 +31,6 @@ def main():
 
     if "\\" in pattern_str:
         print(f"warning: backslashes are not matched as path separators")
-
-    # Path.as_posix()
 
     paths = get_paths(start_dir, recursive)
 
