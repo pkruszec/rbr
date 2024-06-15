@@ -1,0 +1,27 @@
+= rbr.py
+:revdate: 2024-06-15
+
+rbr -- Regex Bulk Rename
+
+Bulk rename files using Python regex patterns.
+
+== Example
+
+Having these files in your working dirrectory:
+----
+Day-20240613.adoc
+Day-20240614.adoc
+Day-20240615.adoc
+----
+
+[source, sh]
+----
+rbr.py "Day-([0-9]{4})([0-9]{2})([0-9]{2}).adoc" "Day-\1-\2-\3.adoc"
+----
+
+You get these files:
+----
+Day-2024-06-13.adoc
+Day-2024-06-14.adoc
+Day-2024-06-15.adoc
+----
