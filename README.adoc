@@ -7,7 +7,7 @@ Bulk rename files using Python regex patterns.
 
 == Example
 
-Having these files in your working dirrectory:
+Having these files in your working directory:
 ----
 Day-20240613.adoc
 Day-20240614.adoc
