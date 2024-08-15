@@ -49,7 +49,9 @@ def main():
             new = pathlib.Path(pattern.sub(replace, path_str))
 
             try:
-                path_matched.rename(new)
+                abs_src = start_dir.joinpath(path_matched)
+                abs_dst = start_dir.joinpath(new)
+                abs_src.rename(abs_dst)
             except FileExistsError:
                 print(f"error: path {new.as_posix()} already exists")
 
