@@ -1,4 +1,43 @@
 #!/usr/bin/env python3
+#
+# Regex Bulk Rename
+# Bulk rename files using Python regex patterns.
+#
+# Having these files in your working directory:
+# - Day-20240613.adoc
+# - Day-20240614.adoc
+# - Day-20240615.adoc
+# 
+# If you execute the program like that:
+#   ./rbr.py "Day-([0-9]{4})([0-9]{2})([0-9]{2}).adoc" "Day-\1-\2-\3.adoc"
+# 
+# You get these files:
+# - Day-2024-06-13.adoc
+# - Day-2024-06-14.adoc
+# - Day-2024-06-15.adoc
+#
+# 
+# Copyright (c) 2024 Paweł Kruszec
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#
+
 import os
 import sys
 import argparse
