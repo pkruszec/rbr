@@ -31,12 +31,15 @@ import sys
 import pathlib
 import glob
 
+output = sys.stdout
+
 def usage(program_name):
     print(f"Usage: {program_name} [option] ... [path] ...")
     print(f"  Arguments:")
     print(f"    path          Target file or directory")
     print(f"  Options:")
     print(f"    -h, --help    Print this message and exit")
+    print(f"    -o <file>     Output to <file>")
     print(f"    -n, --no-rec  No recursive search")
 
 def has_todo(path: pathlib.Path, line: str) -> bool:
@@ -56,7 +59,7 @@ def has_todo(path: pathlib.Path, line: str) -> bool:
     return False
 
 def print_todo(path: pathlib.Path, line: str, i: int):
-    print(f"{path}:{i+1}: {line}")
+    print(f"{path}:{i+1}: {line}", file=output)
 
 def process_file(path: pathlib.Path):
     with open(path, "r", encoding="utf-8-sig") as f:
@@ -85,6 +88,7 @@ def main():
 
     recursive = True
     paths = [pathlib.Path("./")]
+    outfile = None
 
     options = True
     while args:
@@ -96,6 +100,13 @@ def main():
                 continue
             elif arg == "-n" or arg == "--no-rec":
                 recursive = False
+                continue
+            elif arg == "-o":
+                if not args:
+                    print("error: expected path, got nothing", file=sys.stderr)
+                    exit(1)
+
+                outfile, *args = args
                 continue
             else:
                 paths.clear()
@@ -117,6 +128,11 @@ def main():
         new_paths.extend(globs)
     paths = new_paths
 
+    global output
+
+    if outfile is not None:
+        output = open(outfile, "w", encoding="utf-8")
+
     for path in paths:
         if not path.exists():
             print(f"error: path {path} does not exist", file=sys.stderr)
@@ -125,6 +141,8 @@ def main():
             traverse(path, recursive)
         elif path.is_file():
             process_file(path)
+
+    output.close()
 
 if __name__ == "__main__":
     main()
