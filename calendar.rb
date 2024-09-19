@@ -61,7 +61,7 @@ def process_file(path, docs)
 
       if !comment
         if line.start_with?("include::")
-          should_append = false
+          return
         end
 
         if line.start_with?(Revdate)
@@ -106,6 +106,7 @@ args = ARGV
 src_path = nil
 out_path = "calendar.adoc"
 header_path = nil
+footer_path = nil
 
 while args.count > 0
   arg, *args = args
@@ -124,6 +125,12 @@ while args.count > 0
       exit
     end
     header_path, *args = args
+  elsif arg == "--footer"
+    if args.count <= 0
+      puts "error: expected path after --footer"
+      exit
+    end
+    footer_path, *args = args
   else
     src_path = arg
   end
@@ -140,6 +147,11 @@ if !header_path.nil?
   header = File.read(header_path)
 end
 
+footer = ""
+if !footer_path.nil?
+  footer = File.read(footer_path)
+end
+
 docs = []
 traverse(Pathname.new(src_path), docs)
 docs.sort_by! {|doc| doc.revdate}
@@ -154,4 +166,5 @@ File.open(out_path, "w") do |f|
   end
 
   f.write("\n\n:leveloffset: -1\n\n")
+  f.write(footer)
 end
